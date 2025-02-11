@@ -57,7 +57,7 @@
         function sendWhatsAppMessage(event) {
             event.preventDefault();
             const nome = document.getElementById("nome").value;
-            const phoneNumber = "+5531998867994";
+            const phoneNumber = "+5531999769499";
             const message = `Olá, meu nome é ${nome} e confirmo minha presença no aniversário!`;
             const whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
             window.open(whatsappURL, "_blank");
