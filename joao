@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convite de Aniversário na Piscina</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: url('https://source.unsplash.com/1600x900/?pool,party') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="flex flex-col justify-center items-center h-screen bg-blue-500 bg-opacity-50">
+    <div class="bg-white bg-opacity-90 p-8 rounded-2xl shadow-lg max-w-lg text-center relative">
+        <h1 class="text-3xl font-bold text-blue-600">🏖️ Festa na Piscina! 🎉</h1>
+        <p class="mt-4 text-lg">Venha comemorar o aniversário de <strong>Joao Henrique</strong> com muita diversão e água! 💦</p>
+        <p class="mt-2 text-gray-700">📅 Data: <strong>22/02/2025</strong></p>
+        <p class="mt-2 text-gray-700">⏰ Horário: <strong>14h</strong></p>
+        <p class="mt-2 text-gray-700">📍 Local: <a href="https://maps.app.goo.gl/SpUPamreeMkWYrA37" class="text-blue-500 underline">Endereço</a></p>
+        
+        <h2 class="mt-6 text-xl font-semibold text-blue-600">Lista de Presentes 🎁</h2>
+        <ul class="mt-2 text-gray-700">            
+            <li>🎈 Calçados número 35</li>
+            <li>🎈 Blusas ou camisetas tamanho 12</li>
+            <li>🎈 Calças ou bermudas tamanho 12</li>
+        </ul>
+        
+        <h2 class="mt-6 text-xl font-semibold text-red-500">⏳ Contagem Regressiva</h2>
+        <p id="countdown" class="mt-2 text-lg font-bold text-gray-700"></p>
+        
+        <h2 class="mt-6 text-xl font-semibold text-green-600">Confirme sua presença 🎟️</h2>
+        <form class="mt-4" onsubmit="sendWhatsAppMessage(event)">
+            <input type="text" id="nome" placeholder="Seu Nome" class="border p-2 rounded w-full mb-2" required>
+            <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded-full shadow-md hover:bg-blue-700">Confirmar Presença via WhatsApp</button>
+        </form>
+    </div>
+    
+    <script>
+        function countdownTimer() {
+            const eventDate = new Date("2025-02-22 14:00:00").getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const timeLeft = eventDate - now;
+                
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
+                document.getElementById("countdown").innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }, 1000);
+        }
+        countdownTimer();
+
+        function sendWhatsAppMessage(event) {
+            event.preventDefault();
+            const nome = document.getElementById("nome").value;
+            const phoneNumber = "+5531998867994";
+            const message = `Olá, meu nome é ${nome} e confirmo minha presença no aniversário!`;
+            const whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, "_blank");
+        }
+    </script>
+</body>
+</html>
